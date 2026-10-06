@@ -1,0 +1,23 @@
+name: MineBloX
+version: 0.2.0
+main: com.mineblox.core.MineBloXPlugin
+api-version: '1.21'
+author: Superbober
+description: MineBloX - Roblox-style game selector and in-game place studio.
+commands:
+  mineblox:
+    description: Opens the MineBloX main menu.
+    usage: /mineblox
+    aliases: [mbx]
+  places:
+    description: Opens the MineBloX game selector.
+    usage: /places
+  studio:
+    description: Opens MineBloX Studio or edits a place.
+    usage: /studio [place-id|exit]
+  place:
+    description: MineBloX place administration.
+    usage: /place <list|create|delete|setspawn>
+permissions:
+  mineblox.admin:
+    default: op

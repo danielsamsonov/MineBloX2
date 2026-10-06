@@ -1,0 +1,9 @@
+brand: "MineBloX"
+main-menu-title: "§b§lMineBloX"
+places-menu-title: "§9§lMineBloX §f§lPlaces"
+lobby-world: "world"
+places:
+  example:
+    display-name: "§aExample Place"
+    description: "§7A starter MineBloX place"
+    world: "world"
