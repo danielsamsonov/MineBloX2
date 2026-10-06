@@ -2,7 +2,7 @@ name: Build MineBloX
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -11,19 +11,29 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Java 21
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-          cache: maven
-      - name: Build
-        run: mvn -B -ntp clean package
+
+      - name: Build with Gradle
+        run: gradle --no-daemon --stacktrace clean jar
+
+      - name: Verify JAR
+        run: |
+          test -f build/libs/MineBloX-0.2.0.jar
+          jar tf build/libs/MineBloX-0.2.0.jar | grep -q "plugin.yml"
+          jar tf build/libs/MineBloX-0.2.0.jar | grep -q "com/mineblox/core/MineBloXPlugin.class"
+
       - name: Upload MineBloX JAR
         uses: actions/upload-artifact@v4
         with:
           name: MineBloX-plugin
-          path: target/*.jar
+          path: build/libs/MineBloX-0.2.0.jar
           if-no-files-found: error
